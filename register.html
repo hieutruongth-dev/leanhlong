@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="CSS/style_register.css">
+</head>
+
+<body>
+
+    <div class="backgroud-img">
+            <h3>Đăng Kí</h3>
+            <div class="register">
+                <form class="modal-content animate" action="/action_page.php" method="post">
+                    <label for="usrname">Tên đăng nhập</label>
+                    <input type="text" id="usrname" name="usrname" required>
+
+
+                    <label for="email">Email</label>
+                    <input type="text" id="email" name="email" pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/"
+                        title="Email không đúng " required>
+
+                    <label for="psw">Mật khẩu</label>
+                    <input type="password" id="psw" name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                        title="Phải chứa ít nhất một số và một chữ hoa và chữ thường và ít nhất 8 ký tự trở lên"
+                        required>
+
+                    <label for="repsw">Nhập lại mật khẩu</label>
+                    <input type="password" id="repsw" name="repsw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                        title="Không khớp" required>
+
+                    <button>Đăng Ký</button>
+                    <div id="message">
+                        <h3>Mật khẩu phải chứa các thông tin sau:</h3>
+                        <p id="letter" class="invalid">Phải có <b>chữ thường</b></p>
+                        <p id="capital" class="invalid">phải có <b>Chữ hoa</b> </p>
+                        <p id="number" class="invalid">Phải có <b>số</b></p>
+                        <p id="length" class="invalid">Tối thiểu <b>8 kí tự</b></p>
+                    </div>
+                </form>
+            </div>
+    </div>
+    <script>
+        var myInput = document.getElementById("psw");
+        var letter = document.getElementById("letter");
+        var capital = document.getElementById("capital");
+        var number = document.getElementById("number");
+        var length = document.getElementById("length");
+
+        myInput.onfocus = function () {
+            document.getElementById("message").style.display = "block";
+        }
+
+        myInput.onblur = function () {
+            document.getElementById("message").style.display = "none";
+        }
+
+        myInput.onkeyup = function () {
+            var lowerCaseLetters = /[a-z]/g;
+            if (myInput.value.match(lowerCaseLetters)) {
+                letter.classList.remove("invalid");
+                letter.classList.add("valid");
+            } else {
+                letter.classList.remove("valid");
+                letter.classList.add("invalid");
+            }
+
+            var upperCaseLetters = /[A-Z]/g;
+            if (myInput.value.match(upperCaseLetters)) {
+                capital.classList.remove("invalid");
+                capital.classList.add("valid");
+            } else {
+                capital.classList.remove("valid");
+                capital.classList.add("invalid");
+            }
+
+            var numbers = /[0-9]/g;
+            if (myInput.value.match(numbers)) {
+                number.classList.remove("invalid");
+                number.classList.add("valid");
+            } else {
+                number.classList.remove("valid");
+                number.classList.add("invalid");
+            }
+
+            if (myInput.value.length >= 8) {
+                length.classList.remove("invalid");
+                length.classList.add("valid");
+            } else {
+                length.classList.remove("valid");
+                length.classList.add("invalid");
+            }
+        }
+    </script>
+
+</body>
+
+</html>
